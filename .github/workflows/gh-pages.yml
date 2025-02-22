@@ -1,0 +1,41 @@
+name: GitHub Pages - Angular 18
+
+on:
+  push:
+    branches:
+    - master
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.13.1'
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Build for gh-page
+      run: yarn run build:gh
+
+    - name: Copy error files to redirect to home
+      run: yarn run copy-error-page
+
+    - name: Deploy
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        base_href: /single-spa-angular-root-config/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        deploy_branch: gh-pages 
+        publish_dir: dist/single-spa-angular-root-config/browser
+        enable_jekyll: true
+        
