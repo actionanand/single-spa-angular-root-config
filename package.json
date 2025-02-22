@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 20250",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "build:gh": "ng build --base-href /single-spa-angular-root-config/",
