@@ -18,5 +18,6 @@ export const environment = {
       'https://cdn.jsdelivr.net/gh/actionanand/single-spa-vanilla-js@gh-pages/index.js',
     '@actionanand/utility':
       'https://cdn.jsdelivr.net/gh/actionanand/single-spa-utility@gh-pages/actionanand-utility.js',
+    'single-spa-sidebar': 'http://localhost:20251/main.js',
   } as { [key: string]: string },
 };

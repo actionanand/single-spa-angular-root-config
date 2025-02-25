@@ -10,7 +10,7 @@ export const routes: Routes = [
         path: '**',
         component: MicroappComponent,
         data: {
-          componentName: '@actionanand/single-spa-footer',
+          componentName: 'single-spa-sidebar',
         },
       },
     ],
