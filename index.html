@@ -6,8 +6,29 @@
     <base href="/single-spa-angular-root-config/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles-5INURTSO.css"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.4/dist/zone.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script> -->
+
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "react": "https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.development.js",
+          "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js",
+          "rxjs": "https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.4.0/rxjs.umd.min.js",
+          "@actionanand/utility": "https://cdn.jsdelivr.net/gh/actionanand/single-spa-utility@gh-pages/actionanand-utility.js"
+        }
+      }
+    </script>
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
+  <style>body{margin:0;padding:0}html,body{height:100%}</style><link rel="stylesheet" href="styles-AP57XYDI.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-AP57XYDI.css"></noscript></head>
   <body>
-    <app-root></app-root>
-  <script src="polyfills-SCHOHYNV.js" type="module"></script><script src="main-7ATVPPVZ.js" type="module"></script></body>
+    <app-spa-root></app-spa-root>
+  <script src="polyfills-SCHOHYNV.js" type="module"></script><script src="main-A2RYJOGI.js" type="module"></script></body>
 </html>
