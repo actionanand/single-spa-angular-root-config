@@ -1,0 +1,22 @@
+.sspa-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 30vh;
+}
+.sspa-error div {
+  align-items: flex-start;
+  height: 20px;
+  color: #5c6b70;
+  font-family: 'Source Sans Pro';
+  font-size: 18px;
+  line-height: 18px;
+}
+.sspa-error div:first-child {
+  text-decoration: underline;
+}
+.sspa-error div:last-child {
+  font-size: 15px;
+  margin-top: 10px;
+}
