@@ -81,4 +81,13 @@ export class MicroappService {
       return new Observable<void>();
     }
   }
+
+  mountAppWithoutLoader(appName: string, domElement: HTMLElement): void {
+    const customData = this.dataShareService.getData(appName);
+
+    window.System.import(environment['sspa-apps-map'][appName]).then((app: ParcelConfig<CustomProps>) => {
+      this.appParcelConfiMap[appName] = app;
+      this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...customData });
+    });
+  }
 }
