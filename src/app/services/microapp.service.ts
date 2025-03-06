@@ -30,14 +30,23 @@ export class MicroappService {
     [appName: string]: Parcel;
   } = {};
 
-  props = {
-    angTitle: 'Todo',
-    reactTitle: 'Notes',
-    vueTitle: 'Infinity',
-    customProp1: "coming from 'root-config Angular'",
-  };
+  constructor(private SharedDataServ: SharedDataService) {
+    // Set data for each application
+    this.SharedDataServ.setData('single-spa-angular', {
+      angTitle: 'Todo',
+      customProp1: "coming from 'root-config Angular'",
+    });
 
-  constructor(private dataShareService: SharedDataService) {}
+    this.SharedDataServ.setData('@actionanand/single-spa-react', {
+      reactTitle: 'Notes',
+      customProp1: "coming from 'root-config Angular'",
+    });
+
+    this.SharedDataServ.setData('@actionanand/single-spa-vue', {
+      vueTitle: 'Infinity',
+      customProp1: "coming from 'root-config Angular'",
+    });
+  }
 
   mountApp(
     appName: string,
@@ -45,16 +54,16 @@ export class MicroappService {
     callback: (showLoader: boolean, showError: boolean) => void,
   ): void {
     try {
-      const customData = this.dataShareService.getData(appName);
+      const customData = this.SharedDataServ.getData(appName);
 
       if (this.appParcelConfiMap[appName]) {
-        mountRootParcel(this.appParcelConfiMap[appName], { domElement, ...this.props, ...customData });
+        mountRootParcel(this.appParcelConfiMap[appName], { domElement, ...customData });
         callback(false, false);
       } else {
         window.System.import(environment['sspa-apps-map'][appName]).then(
           (app: ParcelConfig<CustomProps>) => {
             this.appParcelConfiMap[appName] = app;
-            this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...this.props, ...customData });
+            this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...customData });
             callback(false, false);
           },
           (error: string) => {
@@ -94,7 +103,7 @@ export class MicroappService {
   }
 
   mountAppWithoutLoader(appName: string, domElement: HTMLElement): void {
-    const customData = this.dataShareService.getData(appName);
+    const customData = this.SharedDataServ.getData(appName);
 
     if (this.appParcelConfiMap[appName]) {
       mountRootParcel(this.appParcelConfiMap[appName], { domElement, ...customData });
