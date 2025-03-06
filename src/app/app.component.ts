@@ -3,7 +3,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 import { ParcelConfig } from 'single-spa';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { MicroUtilityService } from './services/micro-utility.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -38,16 +38,17 @@ export class AppComponent implements OnInit {
       });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const sideBarSub = (app as any).isSidebarCollapsed$.subscribe((value: boolean) => {
+      const sideBarSub: Subscription = (app as any).isSidebarCollapsed$.subscribe((value: boolean) => {
         console.log('Is Sidebar Collapsed: ', value);
 
         this.isSidebarCollapsed = value;
       });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.utiltyState$ = (app as any).state$;
+      const utilitySub: Subscription = (this.utiltyState$ = (app as any).state$);
 
       this.destroyRef.onDestroy(() => sideBarSub.unsubscribe());
+      this.destroyRef.onDestroy(() => utilitySub.unsubscribe());
     });
 
     window.addEventListener('vanilla', (evnt: Event) => {
@@ -76,7 +77,7 @@ export class AppComponent implements OnInit {
       // console.log(data);
       console.log(evnt);
       this.utiltyState$.next({ data });
-      this.route.navigateByUrl('angular');
+      this.route.navigateByUrl('angular/all');
     });
   }
 }

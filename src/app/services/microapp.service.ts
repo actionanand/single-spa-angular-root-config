@@ -31,6 +31,13 @@ export class MicroappService {
     [appName: string]: Parcel;
   } = {};
 
+  props = {
+    angTitle: 'Todo',
+    reactTitle: 'Notes',
+    vueTitle: 'Infinity',
+    customProp1: "coming from 'root-config Angular'",
+  };
+
   constructor(private dataShareService: SharedDataService) {}
 
   mountApp(
@@ -41,17 +48,24 @@ export class MicroappService {
     try {
       const customData = this.dataShareService.getData(appName);
 
-      window.System.import(environment['sspa-apps-map'][appName]).then(
-        (app: ParcelConfig<CustomProps>) => {
-          this.appParcelConfiMap[appName] = app;
-          this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...customData });
-          callback(false, false);
-        },
-        (error: string) => {
-          console.error('error while downloading parcel ' + error);
-          callback(false, true);
-        },
-      );
+      if (this.appParcelConfiMap[appName]) {
+        console.log('if');
+        mountRootParcel(this.appParcelConfiMap[appName], { domElement, ...this.props, ...customData });
+        callback(false, false);
+      } else {
+        window.System.import(environment['sspa-apps-map'][appName]).then(
+          (app: ParcelConfig<CustomProps>) => {
+            console.log('else');
+            this.appParcelConfiMap[appName] = app;
+            this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...this.props, ...customData });
+            callback(false, false);
+          },
+          (error: string) => {
+            console.error('error while downloading parcel ' + error);
+            callback(false, true);
+          },
+        );
+      }
     } catch (error) {
       console.error('Error while mounting app ' + appName);
       console.error(error);
@@ -85,9 +99,13 @@ export class MicroappService {
   mountAppWithoutLoader(appName: string, domElement: HTMLElement): void {
     const customData = this.dataShareService.getData(appName);
 
-    window.System.import(environment['sspa-apps-map'][appName]).then((app: ParcelConfig<CustomProps>) => {
-      this.appParcelConfiMap[appName] = app;
-      this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...customData });
-    });
+    if (this.appParcelConfiMap[appName]) {
+      mountRootParcel(this.appParcelConfiMap[appName], { domElement, ...customData });
+    } else {
+      window.System.import(environment['sspa-apps-map'][appName]).then((app: ParcelConfig<CustomProps>) => {
+        this.appParcelConfiMap[appName] = app;
+        this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...customData });
+      });
+    }
   }
 }
