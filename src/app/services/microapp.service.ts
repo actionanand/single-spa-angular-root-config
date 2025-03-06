@@ -48,13 +48,11 @@ export class MicroappService {
       const customData = this.dataShareService.getData(appName);
 
       if (this.appParcelConfiMap[appName]) {
-        console.log('if');
         mountRootParcel(this.appParcelConfiMap[appName], { domElement, ...this.props, ...customData });
         callback(false, false);
       } else {
         window.System.import(environment['sspa-apps-map'][appName]).then(
           (app: ParcelConfig<CustomProps>) => {
-            console.log('else');
             this.appParcelConfiMap[appName] = app;
             this.appParcelMap[appName] = mountRootParcel(app, { domElement, ...this.props, ...customData });
             callback(false, false);
