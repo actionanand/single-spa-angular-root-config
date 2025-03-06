@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { lastValueFrom } from 'rxjs';
@@ -14,8 +14,8 @@ import { LoaderComponent } from '../shared-components/loader/loader.component';
   templateUrl: './microapp.component.html',
   styleUrl: './microapp.component.scss',
 })
-export class MicroappComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('microAppContainer')
+export class MicroappComponent implements OnDestroy, OnInit {
+  @ViewChild('microAppContainer', { static: true })
   private microApplicationContainer!: ElementRef;
 
   private applicationName!: string;
@@ -31,7 +31,7 @@ export class MicroappComponent implements AfterViewInit, OnDestroy {
     this.applicationName = this.route.snapshot.data['componentName'];
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
     this.toggleLoader(true);
     this.microAppService.mountApp(
       this.applicationName,

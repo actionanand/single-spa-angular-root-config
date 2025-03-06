@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { MicroappComponent } from './microapp/microapp.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { MyViewComponent } from './shared-components/my-view/my-view.component';
 
 export const routes: Routes = [
   {
@@ -9,7 +9,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SidebarComponent,
+        component: MyViewComponent,
         outlet: 'sidebar',
       },
       {
@@ -27,7 +27,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SidebarComponent,
+        component: MyViewComponent,
         outlet: 'sidebar',
       },
       {
@@ -51,7 +51,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SidebarComponent,
+        component: MyViewComponent,
         outlet: 'sidebar',
       },
       {
@@ -75,7 +75,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SidebarComponent,
+        component: MyViewComponent,
         outlet: 'sidebar',
       },
       {
@@ -99,7 +99,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SidebarComponent,
+        component: MyViewComponent,
         outlet: 'sidebar',
       },
       {
@@ -127,7 +127,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: SidebarComponent,
+        component: MyViewComponent,
         outlet: 'sidebar',
       },
       {
