@@ -8,6 +8,12 @@ import { Subject, Subscription } from 'rxjs';
 import { MicroUtilityService } from './services/micro-utility.service';
 import { MyViewComponent } from './shared-components/my-view/my-view.component';
 
+interface ExtendedParcelConfig {
+  state$: Subject<{ data: unknown }>;
+  isSidebarCollapsed$: Subject<boolean>;
+  getData(url: string): Promise<unknown>;
+}
+
 @Component({
   selector: 'app-spa-root',
   standalone: true,
@@ -32,23 +38,22 @@ export class AppComponent implements OnInit {
     this.utilityServ.importUtility('@actionanand/utility').then((app: ParcelConfig) => {
       this.appParcelConfiMap['@actionanand/utility'] = app;
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (app as any).getData('/test-url').then((data: any) => {
+      (app as unknown as ExtendedParcelConfig).getData('/test-url').then((data: unknown) => {
         console.log('angular-root-config App: ', data);
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const sideBarSub: Subscription = (app as any).isSidebarCollapsed$.subscribe((value: boolean) => {
-        console.log('Is Sidebar Collapsed: ', value);
+      const sideBarSub: Subscription = (app as unknown as ExtendedParcelConfig).isSidebarCollapsed$.subscribe(
+        (value: boolean) => {
+          console.log('Is Sidebar Collapsed: ', value);
 
-        this.isSidebarCollapsed = value;
-      });
+          this.isSidebarCollapsed = value;
+        },
+      );
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const utilitySub: Subscription = (this.utiltyState$ = (app as any).state$);
+      this.utiltyState$ = (app as unknown as ExtendedParcelConfig).state$;
 
       this.destroyRef.onDestroy(() => sideBarSub.unsubscribe());
-      this.destroyRef.onDestroy(() => utilitySub.unsubscribe());
+      this.destroyRef.onDestroy(() => this.utiltyState$.unsubscribe());
     });
 
     window.addEventListener('vanilla', (evnt: Event) => {

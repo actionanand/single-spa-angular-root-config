@@ -13,8 +13,7 @@ declare global {
     System: {
       import: (app: string) => Promise<ParcelConfig>;
       delete: (app: string) => boolean;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      resolve: (app: string) => any;
+      resolve: (app: string) => ParcelConfig;
     };
   }
 }
