@@ -6,12 +6,12 @@ import { ParcelConfig } from 'single-spa';
 import { Subject, Subscription } from 'rxjs';
 
 import { MicroUtilityService } from './services/micro-utility.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { MyViewComponent } from './shared-components/my-view/my-view.component';
 
 @Component({
   selector: 'app-spa-root',
   standalone: true,
-  imports: [RouterOutlet, NgClass, SidebarComponent],
+  imports: [RouterOutlet, NgClass, MyViewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
