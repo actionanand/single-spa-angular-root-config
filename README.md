@@ -2,6 +2,24 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
 
+## Overview
+
+This is **polyglot** single-spa root cinfig app using Angular Framework in root config.
+This repo is used in conjunction with eleven other repos listed below. Together they make up an application composed of microfrontends. Each app can be updated and deployed independently from the others.
+
+- [**Root Config** (This Repo)](https://github.com/actionanand/single-spa-demo-root-config)
+- [**Angular App**](https://github.com/actionanand/single-spa-angular)
+- [**React App**](https://github.com/actionanand/single-spa-react)
+- [**Vue App**](https://github.com/actionanand/single-spa-vue)
+- [**Svelte App**](https://github.com/actionanand/single-spa-svelte)
+- [**sidebar App**](https://github.com/actionanand/single-spa-sidebar)
+- [**Footer App**](https://github.com/actionanand/single-spa-footer)
+- [**404 App**](https://github.com/actionanand/single-spa-404)
+- [**Vanilla JS App**](https://github.com/actionanand/single-spa-vanilla-js)
+- [**Utility App**](https://github.com/actionanand/single-spa-utility)
+- [**Angular Parcel App**](https://github.com/actionanand/angular-parcel-app)
+- [**React Parcel App**](https://github.com/actionanand/react-parcel-app)
+
 ## Cloning Guide
 
 1.  Clone only the remote primary HEAD (default: origin/master)
