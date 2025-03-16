@@ -20,6 +20,18 @@ This repo is used in conjunction with eleven other repos listed below. Together 
 - [**Angular Parcel App**](https://github.com/actionanand/angular-parcel-app)
 - [**React Parcel App**](https://github.com/actionanand/react-parcel-app)
 
+### Live site preview
+
+1. https://single-spa-angular.surge.sh
+2. https://single-spa-angular.onrender.com
+3. https://actionanand.github.io/single-spa-angular-root-config
+
+### How to deploy in surge
+
+```sh
+yarn run deploy:surge
+```
+
 ## Cloning Guide
 
 1.  Clone only the remote primary HEAD (default: origin/master)
