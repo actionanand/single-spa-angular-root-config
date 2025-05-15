@@ -1,0 +1,37 @@
+name: Rebuild and Deploy to Surge
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.13.1'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Remove dist folder
+        run: rm -rf dist
+
+      - name: Build project
+        run: yarn build
+
+      - name: Copy error files to redirect to home
+        run: yarn run copy-error-page
+
+      - name: Deploy to Surge
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        run: npx surge --project ./dist/single-spa-angular-root-config/browser --domain single-spa-angular.surge.sh --token $SURGE_TOKEN

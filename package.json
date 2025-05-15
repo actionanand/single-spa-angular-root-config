@@ -15,7 +15,8 @@
     "test": "ng test",
     "prepare": "husky",
     "lint": "ng lint",
-    "deploy:surge": "surge --project ./dist/single-spa-angular-root-config/browser --domain single-spa-angular.surge.sh"
+    "deploy:surge": "surge --project ./dist/single-spa-angular-root-config/browser --domain single-spa-angular.surge.sh",
+    "redeploy:surge": "rm -rf build && yarn build && yarn copy-error-page && yarn deploy:surge"
   },
   "private": true,
   "dependencies": {

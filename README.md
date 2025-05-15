@@ -68,6 +68,24 @@ git clone https://github.com/actionanand/single-spa-angular-root-config.git --br
 npx degit github:actionanand/single-spa-angular-root-config#1-skeleton angular-proj-name
 ```
 
+### Creating surge token
+
+1. install surge globally
+
+```sh
+npm install surge -g
+```
+
+2. Generating Surge token
+
+```sh
+surge token
+```
+
+For the first time, you installed surge, it takes your email and password to create/login account through terminal.
+
+3. Save this token in a `SECRET` with name `SURGE_TOKEN`. For this goto Repo Settings > Secrets > New_secret. Enter Token Name `SURGE_TOKEN` and paste the token generated in it.
+
 ## Automate using `Prettier`, `Es Lint` and `Husky`
 
 1. Install the compatible node version
